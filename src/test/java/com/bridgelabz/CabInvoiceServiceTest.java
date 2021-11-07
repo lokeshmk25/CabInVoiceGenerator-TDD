@@ -42,12 +42,12 @@ public class CabInvoiceServiceTest {
 
     @Test
     void givenUseIdAndRides_ShouldReturnInvoiceSummary() {
-        String userId="a@b.com";
+        String userId = "a@b.com";
         Ride[] rides = {new Ride(2.0, 5),
                 new Ride(0.1, 1),
         };
-        invoiceService.addRides(userId,rides);
-        InvoiceSummary summary=invoiceService.getInvoiceSummary(userId);
+        invoiceService.addRides(userId, rides);
+        InvoiceSummary summary = invoiceService.getInvoiceSummary(userId);
         InvoiceSummary expctedInvoiceSummary = new InvoiceSummary(2, 30.0);
         Assertions.assertEquals(expctedInvoiceSummary, summary);
     }
