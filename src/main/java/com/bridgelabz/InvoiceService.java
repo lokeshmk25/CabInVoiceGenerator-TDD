@@ -13,6 +13,7 @@ public class InvoiceService {
         this.RideRepository = new RideRepository();
     }
 
+
     /**
      * Purpose- To calculate Fair for Particular Ride
      *
@@ -21,10 +22,9 @@ public class InvoiceService {
      * @return totalfare
      */
     public double calculateFare(double distance, int time) {
-        double totalFare = distance * MIN_COST_PER_KM + time * COST_PER_MIN;
+        double totalFare = (distance * MIN_COST_PER_KM) + (time * COST_PER_MIN);
         return Math.max(totalFare, MINIMUM_FARE);
     }
-
     /**
      * Purpose - To calculate fair for array of rides
      *
@@ -34,7 +34,7 @@ public class InvoiceService {
     public InvoiceSummary calculateFare(Ride[] rides) {
         double totalFare = 0;
         for (Ride ride : rides) {
-            totalFare += this.calculateFare(ride.distance, ride.time);
+            totalFare += ride.cabRide.calculateRideFare(ride);
         }
         return new InvoiceSummary(rides.length, totalFare);
     }
