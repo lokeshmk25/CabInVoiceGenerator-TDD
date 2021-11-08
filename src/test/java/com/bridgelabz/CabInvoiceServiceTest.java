@@ -51,4 +51,17 @@ public class CabInvoiceServiceTest {
         InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2, 46.0);
         Assertions.assertEquals(expectedInvoiceSummary, actualSummary);
     }
+
+    @Test
+    void givenUserIDAndRideList_ShouldReturnInvoiceSummeryForPremium() {
+        String userId = "Loki";
+        Ride[] rides = new Ride[]{new Ride(CabRide.PREMIUM, 2.0, 5),
+                new Ride(CabRide.PREMIUM, 0.1, 1),
+                new Ride(CabRide.PREMIUM, 2.0, 5)
+        };
+        invoiceService.addRides(userId, rides);
+        InvoiceSummary actualSummary = invoiceService.getInvoiceSummary(userId);
+        InvoiceSummary expectedInvoice = new InvoiceSummary(3, 100.0);
+        Assertions.assertEquals(expectedInvoice, actualSummary);
+    }
 }
